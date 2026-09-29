@@ -1,0 +1,732 @@
+[
+  {
+    "id": "ticket_101",
+    "state": "Duplicate charge on invoice #9041. We were billed twice for March. Please issue a refund immediately or we will cancel our subscription.",
+    "prediction": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "billing",
+          "probabilities": {
+            "billing": 0.9555,
+            "technical": 0.0218,
+            "sales": 0.0228
+          },
+          "confidence": 0.8062,
+          "answer_confidence": 0.9555,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.7582,
+          "legend": {
+            "0": "low",
+            "1": "medium",
+            "2": "blocking"
+          },
+          "probabilities": {
+            "0": 0.0565,
+            "1": 0.1288,
+            "2": 0.8147
+          },
+          "confidence": 0.46,
+          "answer_confidence": 0.8147,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "churn_risk": {
+          "type": "noul",
+          "noul": 0.7567,
+          "confidence": 0.7567,
+          "answer_confidence": 0.7567,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 205,
+        "output_tokens": 0
+      },
+      "routing": {
+        "model": "english",
+        "repo": "convaiinnovations/laya",
+        "reason": "English Latin text",
+        "detection": {
+          "script": "latin",
+          "script_profile": {
+            "latin": 1.0
+          },
+          "language": "en",
+          "is_english": true,
+          "language_undecided": false,
+          "diacritic_rate": 0.0,
+          "non_latin_fraction": 0.0,
+          "mixed_segment": null
+        },
+        "workflow": null
+      }
+    }
+  },
+  {
+    "id": "ticket_102",
+    "state": "I am unable to access my account. I keep getting an error message when I try to log in. Please help me resolve this issue as soon as possible.",
+    "prediction": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "technical",
+          "probabilities": {
+            "billing": 0.4489,
+            "technical": 0.457,
+            "sales": 0.0941
+          },
+          "confidence": 0.1445,
+          "answer_confidence": 0.457,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.6189,
+          "legend": {
+            "0": "low",
+            "1": "medium",
+            "2": "blocking"
+          },
+          "probabilities": {
+            "0": 0.0464,
+            "1": 0.2882,
+            "2": 0.6653
+          },
+          "confidence": 0.2971,
+          "answer_confidence": 0.6653,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "churn_risk": {
+          "type": "noul",
+          "noul": 0.0405,
+          "confidence": 0.9595,
+          "answer_confidence": 0.9595,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 217,
+        "output_tokens": 0
+      },
+      "routing": {
+        "model": "english",
+        "repo": "convaiinnovations/laya",
+        "reason": "English Latin text",
+        "detection": {
+          "script": "latin",
+          "script_profile": {
+            "latin": 1.0
+          },
+          "language": "en",
+          "is_english": true,
+          "language_undecided": false,
+          "diacritic_rate": 0.0,
+          "non_latin_fraction": 0.0,
+          "mixed_segment": null
+        },
+        "workflow": null
+      }
+    }
+  },
+  {
+    "id": "ticket_103",
+    "state": "I would like to upgrade my subscription to the premium plan. Can you provide me with the details and pricing for the premium plan?",
+    "prediction": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "billing",
+          "probabilities": {
+            "billing": 0.4953,
+            "technical": 0.1218,
+            "sales": 0.3829
+          },
+          "confidence": 0.1152,
+          "answer_confidence": 0.4953,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0.8549,
+          "legend": {
+            "0": "low",
+            "1": "medium",
+            "2": "blocking"
+          },
+          "probabilities": {
+            "0": 0.2071,
+            "1": 0.7309,
+            "2": 0.062
+          },
+          "confidence": 0.3377,
+          "answer_confidence": 0.7309,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "churn_risk": {
+          "type": "noul",
+          "noul": 0.0257,
+          "confidence": 0.9743,
+          "answer_confidence": 0.9743,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 199,
+        "output_tokens": 0
+      },
+      "routing": {
+        "model": "english",
+        "repo": "convaiinnovations/laya",
+        "reason": "English Latin text",
+        "detection": {
+          "script": "latin",
+          "script_profile": {
+            "latin": 1.0
+          },
+          "language": "en",
+          "is_english": true,
+          "language_undecided": false,
+          "diacritic_rate": 0.0,
+          "non_latin_fraction": 0.0,
+          "mixed_segment": null
+        },
+        "workflow": null
+      }
+    }
+  },
+  {
+    "id": "ticket_104",
+    "state": "I have a question about the features of your product. Can you provide me with more information about the capabilities and limitations of your product?",
+    "prediction": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "sales",
+          "probabilities": {
+            "billing": 0.3758,
+            "technical": 0.1519,
+            "sales": 0.4723
+          },
+          "confidence": 0.0821,
+          "answer_confidence": 0.4723,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0.931,
+          "legend": {
+            "0": "low",
+            "1": "medium",
+            "2": "blocking"
+          },
+          "probabilities": {
+            "0": 0.1152,
+            "1": 0.8386,
+            "2": 0.0462
+          },
+          "confidence": 0.5097,
+          "answer_confidence": 0.8386,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "churn_risk": {
+          "type": "noul",
+          "noul": 0.0008,
+          "confidence": 0.9992,
+          "answer_confidence": 0.9992,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 202,
+        "output_tokens": 0
+      },
+      "routing": {
+        "model": "english",
+        "repo": "convaiinnovations/laya",
+        "reason": "English Latin text",
+        "detection": {
+          "script": "latin",
+          "script_profile": {
+            "latin": 1.0
+          },
+          "language": "en",
+          "is_english": true,
+          "language_undecided": false,
+          "diacritic_rate": 0.0,
+          "non_latin_fraction": 0.0,
+          "mixed_segment": null
+        },
+        "workflow": null
+      }
+    }
+  },
+  {
+    "id": "ticket_105",
+    "state": "I am experiencing a technical issue with your software. It keeps crashing when I try to open it. Can you help me troubleshoot this problem?",
+    "prediction": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "technical",
+          "probabilities": {
+            "billing": 0.0745,
+            "technical": 0.8789,
+            "sales": 0.0465
+          },
+          "confidence": 0.5907,
+          "answer_confidence": 0.8789,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.3603,
+          "legend": {
+            "0": "low",
+            "1": "medium",
+            "2": "blocking"
+          },
+          "probabilities": {
+            "0": 0.1134,
+            "1": 0.4129,
+            "2": 0.4737
+          },
+          "confidence": 0.1207,
+          "answer_confidence": 0.4737,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "churn_risk": {
+          "type": "noul",
+          "noul": 0.0573,
+          "confidence": 0.9427,
+          "answer_confidence": 0.9427,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 211,
+        "output_tokens": 0
+      },
+      "routing": {
+        "model": "english",
+        "repo": "convaiinnovations/laya",
+        "reason": "English Latin text",
+        "detection": {
+          "script": "latin",
+          "script_profile": {
+            "latin": 1.0
+          },
+          "language": "en",
+          "is_english": true,
+          "language_undecided": false,
+          "diacritic_rate": 0.0,
+          "non_latin_fraction": 0.0,
+          "mixed_segment": null
+        },
+        "workflow": null
+      }
+    }
+  },
+  {
+    "id": "ticket_106",
+    "state": "I would like to cancel my subscription. Can you please provide me with the steps to cancel my account and any information about refunds?",
+    "prediction": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "billing",
+          "probabilities": {
+            "billing": 0.6663,
+            "technical": 0.1366,
+            "sales": 0.1971
+          },
+          "confidence": 0.2148,
+          "answer_confidence": 0.6663,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0.8946,
+          "legend": {
+            "0": "low",
+            "1": "medium",
+            "2": "blocking"
+          },
+          "probabilities": {
+            "0": 0.2294,
+            "1": 0.6466,
+            "2": 0.124
+          },
+          "confidence": 0.2003,
+          "answer_confidence": 0.6466,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "churn_risk": {
+          "type": "noul",
+          "noul": 0.7434,
+          "confidence": 0.7434,
+          "answer_confidence": 0.7434,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 202,
+        "output_tokens": 0
+      },
+      "routing": {
+        "model": "english",
+        "repo": "convaiinnovations/laya",
+        "reason": "English Latin text",
+        "detection": {
+          "script": "latin",
+          "script_profile": {
+            "latin": 1.0
+          },
+          "language": "en",
+          "is_english": true,
+          "language_undecided": false,
+          "diacritic_rate": 0.0,
+          "non_latin_fraction": 0.0,
+          "mixed_segment": null
+        },
+        "workflow": null
+      }
+    }
+  },
+  {
+    "id": "ticket_107",
+    "state": "I have a billing question regarding my recent invoice. Can you please clarify the charges and provide me with a breakdown of the fees?",
+    "prediction": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "billing",
+          "probabilities": {
+            "billing": 0.9893,
+            "technical": 0.0053,
+            "sales": 0.0054
+          },
+          "confidence": 0.9394,
+          "answer_confidence": 0.9893,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0.9096,
+          "legend": {
+            "0": "low",
+            "1": "medium",
+            "2": "blocking"
+          },
+          "probabilities": {
+            "0": 0.1522,
+            "1": 0.786,
+            "2": 0.0618
+          },
+          "confidence": 0.4103,
+          "answer_confidence": 0.786,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "churn_risk": {
+          "type": "noul",
+          "noul": 0.0,
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 199,
+        "output_tokens": 0
+      },
+      "routing": {
+        "model": "english",
+        "repo": "convaiinnovations/laya",
+        "reason": "English Latin text",
+        "detection": {
+          "script": "latin",
+          "script_profile": {
+            "latin": 1.0
+          },
+          "language": "en",
+          "is_english": true,
+          "language_undecided": false,
+          "diacritic_rate": 0.0,
+          "non_latin_fraction": 0.0,
+          "mixed_segment": null
+        },
+        "workflow": null
+      }
+    }
+  },
+  {
+    "id": "ticket_108",
+    "state": "I am interested in learning more about your product. Can you provide me with a demo or trial version so I can test it out before making a purchase?",
+    "prediction": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "sales",
+          "probabilities": {
+            "billing": 0.3165,
+            "technical": 0.1957,
+            "sales": 0.4878
+          },
+          "confidence": 0.0593,
+          "answer_confidence": 0.4878,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0.8463,
+          "legend": {
+            "0": "low",
+            "1": "medium",
+            "2": "blocking"
+          },
+          "probabilities": {
+            "0": 0.1767,
+            "1": 0.8004,
+            "2": 0.0229
+          },
+          "confidence": 0.4802,
+          "answer_confidence": 0.8004,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "churn_risk": {
+          "type": "noul",
+          "noul": 0.0,
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 214,
+        "output_tokens": 0
+      },
+      "routing": {
+        "model": "english",
+        "repo": "convaiinnovations/laya",
+        "reason": "English Latin text",
+        "detection": {
+          "script": "latin",
+          "script_profile": {
+            "latin": 1.0
+          },
+          "language": "en",
+          "is_english": true,
+          "language_undecided": false,
+          "diacritic_rate": 0.0,
+          "non_latin_fraction": 0.0,
+          "mixed_segment": null
+        },
+        "workflow": null
+      }
+    }
+  },
+  {
+    "id": "ticket_109",
+    "state": "I am having trouble with the installation process of your software. Can you provide me with step-by-step instructions or troubleshooting tips to help me complete the installation?",
+    "prediction": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "technical",
+          "probabilities": {
+            "billing": 0.2092,
+            "technical": 0.6891,
+            "sales": 0.1017
+          },
+          "confidence": 0.2569,
+          "answer_confidence": 0.6891,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0.9239,
+          "legend": {
+            "0": "low",
+            "1": "medium",
+            "2": "blocking"
+          },
+          "probabilities": {
+            "0": 0.1429,
+            "1": 0.7903,
+            "2": 0.0668
+          },
+          "confidence": 0.4131,
+          "answer_confidence": 0.7903,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "churn_risk": {
+          "type": "noul",
+          "noul": 0.0001,
+          "confidence": 0.9999,
+          "answer_confidence": 0.9999,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 226,
+        "output_tokens": 0
+      },
+      "routing": {
+        "model": "english",
+        "repo": "convaiinnovations/laya",
+        "reason": "English Latin text",
+        "detection": {
+          "script": "latin",
+          "script_profile": {
+            "latin": 1.0
+          },
+          "language": "en",
+          "is_english": true,
+          "language_undecided": false,
+          "diacritic_rate": 0.0,
+          "non_latin_fraction": 0.0,
+          "mixed_segment": null
+        },
+        "workflow": null
+      }
+    }
+  },
+  {
+    "id": "ticket_110",
+    "state": "I have a question about the security features of your product. Can you provide me with information about how my data is protected and what measures are in place to prevent unauthorized access?",
+    "prediction": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "billing",
+          "probabilities": {
+            "billing": 0.4158,
+            "technical": 0.2453,
+            "sales": 0.339
+          },
+          "confidence": 0.0203,
+          "answer_confidence": 0.4158,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.0283,
+          "legend": {
+            "0": "low",
+            "1": "medium",
+            "2": "blocking"
+          },
+          "probabilities": {
+            "0": 0.0976,
+            "1": 0.7766,
+            "2": 0.1259
+          },
+          "confidence": 0.3771,
+          "answer_confidence": 0.7766,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "churn_risk": {
+          "type": "noul",
+          "noul": 0.0001,
+          "confidence": 0.9999,
+          "answer_confidence": 0.9999,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 226,
+        "output_tokens": 0
+      },
+      "routing": {
+        "model": "english",
+        "repo": "convaiinnovations/laya",
+        "reason": "English Latin text",
+        "detection": {
+          "script": "latin",
+          "script_profile": {
+            "latin": 1.0
+          },
+          "language": "en",
+          "is_english": true,
+          "language_undecided": false,
+          "diacritic_rate": 0.0,
+          "non_latin_fraction": 0.0,
+          "mixed_segment": null
+        },
+        "workflow": null
+      }
+    }
+  }
+]
