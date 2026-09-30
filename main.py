@@ -3,22 +3,28 @@ import asyncio
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, status
 from schema import PromptRequest, PromptResponse
-from laya_engine import LayaEngine
+from laya_engine import LayaEngine, DynamicBatcher
 
-# Lifespan: Loads the model once into RAM when the server starts
+# Lifespan: Loads the model and manages the dynamic micro-batcher
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    app.state.engine = LayaEngine(device="cuda") # switch to "cuda" if using GPU
+    engine = LayaEngine(device="cuda") # switch to "cuda" if using GPU
+    batcher = DynamicBatcher(engine=engine, max_batch_size=8, max_delay_ms=5.0)
+    batcher.start()
+
+    app.state.engine = engine
+    app.state.batcher = batcher
     yield
+    await batcher.stop()
 
 app = FastAPI(title="CircuitBreaker Gateway", lifespan=lifespan)
 
 @app.post("/inspect", response_model=PromptResponse)
 async def inspect_prompt(payload: PromptRequest):
-    engine: LayaEngine = app.state.engine
+    batcher: DynamicBatcher = app.state.batcher
 
-    # Push CPU/GPU computation to a worker thread so the event loop stays unblocked
-    result = await asyncio.to_thread(engine.evaluate, payload.prompt)
+    # Dynamic Micro-Batching: aggregates concurrent requests over a 5ms window
+    result = await batcher.submit(payload.prompt)
     
     answers = result["answers"]
     latency = result["latency_ms"]
