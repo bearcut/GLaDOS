@@ -1,3 +1,25 @@
 # GlaDos Configuration
 model:
-  name: "answerdotai/ModernBERT-base"
+  name: "jhu-clsp/mmbert-base"
+  hidden_size: 768
+  dropout: 0.1
+  attn_implementation: "sdpa"
+  dtype: "bfloat16"
+  unfreeze_top_k_layers: 4
+
+  # Parallel Classification Head Dimensions
+  heads:
+    num_injection_classes: 4         # 0: Benign, 1: Direct, 2: Indirect/RAG, 3: Encoded Jailbreak
+    num_routing_classes: 3           # 0: Trivial, 1: Fast LLM, 2: Deep Reasoning LLM
+    num_pii_classes: 7               # 0: O, 1: B-API_KEY, 2: I-API_KEY, 3: B-EMAIL, 4: I-EMAIL, 5: B-PAN, 6: I-PAN
+
+# 2. Pre-Tokenizer Normalizer Settings (< 0.25 ms budget)
+preprocessor:
+  entropy_threshold: 3.6             # Minimum Shannon entropy to trigger Base64 decoding
+  max_turns: 6                       # Sliding window of last K conversation turns
+  special_tokens:
+    - "[SYS]"
+    - "[USER]"
+    - "[UNTRUSTED_TOOL]"
+    - "[RAW]"
+    - "[DECODED]"
