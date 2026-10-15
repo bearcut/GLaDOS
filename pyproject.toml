@@ -20,7 +20,13 @@ dependencies = [
     "numpy>=1.26.0",
     "regex>=2024.0.0",
     "rich>=13.7.0",
+    "pyyaml>=6.0.3",
 ]
+
+[tool.uv.build-backend]
+module-name = ["models", "preprocessor", "proxy", "training"]
+module-root = "src"
+
 
 [project.optional-dependencies]
 dev = [
@@ -31,7 +37,7 @@ dev = [
 ]
 
 [project.scripts]
-glados = "glados:main"
+glados = "proxy.server:main"
 
 [build-system]
 requires = ["uv_build>=0.13.1,<0.14.0"]
