@@ -10,3 +10,9 @@ wheels/
 .venv/
 *.parquet
 *.xlsx
+**/temp/
+**temp.py
+
+# Added by cargo
+
+**/target/
