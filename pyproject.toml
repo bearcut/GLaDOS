@@ -21,6 +21,7 @@ dependencies = [
     "regex>=2024.0.0",
     "rich>=13.7.0",
     "pyyaml>=6.0.3",
+    "maturin>=1.15.0",
 ]
 
 [tool.uv.build-backend]
@@ -42,3 +43,8 @@ glados = "proxy.server:main"
 [build-system]
 requires = ["uv_build>=0.13.1,<0.14.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "maturin>=1.15.0",
+]
