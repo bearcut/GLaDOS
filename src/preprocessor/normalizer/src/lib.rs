@@ -1,73 +1,136 @@
+use base64::{Engine as _, engine::general_purpose::STANDARD};
 use pyo3::prelude::*;
+use std::collections::HashMap;
 
-/// 1. THE STRUCT (Data Layout in Memory)
-/// #[pyclass] tells PyO3 to generate a Python class wrapper around this Rust struct.
+const DELIMITERS: [u32; 16] = [
+    9, 10, 13, 32, 34, 38, 40, 44, 46, 58, 59, 63, 91, 93, 123, 125,
+];
+
 #[pyclass]
 pub struct NormalizerEngine {
     entropy_threshold: f32,
+    map: HashMap<u32, u32>,
 }
 
-/// 2. INTERNAL HELPER FUNCTION (Pure Rust - Not exposed to Python)
-/// Notice `text: &str`. Just like `std::string_view` in C++, `&str` is a borrowed
-/// read-only slice (pointer + length). It reads Python's string memory directly with ZERO copying!
-fn calculate_entropy(text: &str) -> f32 {
-    let bytes = text.as_bytes();
-    let len = bytes.len();
-    if len == 0 {
+/// 2. INTERNAL HELPER FUNCTION
+
+fn calculate_entropy(text: &str, map: &mut HashMap<u32, u32>) -> f32 {
+    map.clear();
+
+    let mut total_chars = 0usize;
+    for c in text.chars() {
+        *map.entry(c as u32).or_insert(0) += 1;
+        total_chars += 1;
+    }
+
+    if total_chars == 0 {
         return 0.0;
     }
 
-    // Stack-allocated array of 256 unsigned 32-bit ints initialized to 0.
-    // Why? Heap allocation (malloc/Vec) is slow. A fixed stack array takes <1 nanosecond.
-    let mut counts = [0u32; 256];
-    for &b in bytes {
-        counts[b as usize] += 1;
-    }
-
-    let len_f = len as f32;
+    let len_f = total_chars as f32;
     let mut entropy = 0.0f32;
 
-    for &count in counts.iter() {
-        if count > 0 {
-            let p = (count as f32) / len_f;
-            entropy -= p * p.log2();
-        }
+    for &count in map.values() {
+        let p = count as f32 / len_f;
+        entropy -= p * p.log2();
     }
     entropy
 }
 
+fn binary_search(arr: &[u32; 16], c: u32) -> bool {
+    if c > 125 {
+        return false;
+    }
+    let mut low: usize = 0;
+    let mut high: usize = 15;
+    let mut mid: usize;
+    while low <= high {
+        mid = low + (high - low) / 2;
+        if arr[mid] == c {
+            return true;
+        } else if arr[mid] < c {
+            low = mid + 1;
+        } else {
+            if mid == 0 {
+                break;
+            }
+            high = mid - 1;
+        }
+    }
+    return false;
+}
+
+fn decode_base64(encoded: &str) -> Result<String, Box<dyn std::error::Error>> {
+    let bytes = STANDARD.decode(encoded)?;
+    let decoded_string = String::from_utf8(bytes)?;
+    Ok(decoded_string)
+}
+
 /// 3. THE METHODS (Exposed to Python)
-/// #[pymethods] exposes these functions as methods on the Python class.
 #[pymethods]
 impl NormalizerEngine {
-    /// #[new] is the Python `__init__` constructor.
     #[new]
     pub fn new(entropy_threshold: f32) -> Self {
-        NormalizerEngine { entropy_threshold }
-    }
-
-    /// Takes a borrowed string slice (`&str`) from Python and returns a new owned `String`.
-    pub fn inspect_word(&self, word: &str) -> String {
-        let h = calculate_entropy(word);
-
-        if h >= self.entropy_threshold {
-            // `format!` allocates a new heap String (like sprintf / std::format)
-            format!("[HIGH_ENTROPY: {:.2}] {}", h, word)
-        } else {
-            // Convert the borrowed slice into an owned String to hand back to Python
-            word.to_string()
+        let map = HashMap::<u32, u32>::new();
+        NormalizerEngine {
+            entropy_threshold,
+            map,
         }
     }
 
-    /// Directly expose the math function so you can test it from Python
-    pub fn get_entropy(&self, word: &str) -> f32 {
-        calculate_entropy(word)
+    pub fn encode(&mut self, prompt: &str) -> String {
+        let mut encoded_string = String::with_capacity(prompt.len());
+        let mut buffer = String::new();
+        for c in prompt.chars() {
+            if binary_search(&DELIMITERS, c as u32) {
+                let entropy = calculate_entropy(&buffer, &mut self.map);
+                if entropy >= self.entropy_threshold {
+                    match decode_base64(&buffer) {
+                        Ok(decoded) => {
+                            encoded_string.push_str(&format!(
+                                "[RAW] {} [DECODED] {} [ENDDECODE]",
+                                buffer, decoded
+                            ));
+                        }
+                        Err(_) => {
+                            encoded_string.push_str(&buffer);
+                        }
+                    }
+                } else {
+                    encoded_string.push_str(&buffer);
+                }
+                encoded_string.push(c);
+                buffer.clear();
+            } else {
+                buffer.push(c);
+            }
+        }
+
+        if !buffer.is_empty() {
+            let entropy = calculate_entropy(&buffer, &mut self.map);
+            if entropy >= self.entropy_threshold {
+                match decode_base64(&buffer) {
+                    Ok(decoded) => {
+                        encoded_string.push_str(&format!("[RAW] {} [DECODED] {}", buffer, decoded));
+                    }
+                    Err(_) => {
+                        encoded_string.push_str(&buffer);
+                    }
+                }
+            } else {
+                encoded_string.push_str(&buffer);
+            }
+        }
+
+        encoded_string
+    }
+
+    pub fn flush(&mut self) {
+        self.map.clear();
     }
 }
 
 /// 4. MODULE REGISTRATION
-/// The function name MUST match `name = "glados_normalizer"` in Cargo.toml.
-/// This is what runs when Python executes `import glados_normalizer`.
 #[pymodule]
 fn normalizer(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<NormalizerEngine>()?;

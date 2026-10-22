@@ -1,6 +1,6 @@
 [package]
 name = "normalizer"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2024"
 
 [lib]
@@ -8,4 +8,5 @@ name = "normalizer"
 crate-type = ["cdylib"]
 
 [dependencies]
+base64 = "0.23.1"
 pyo3 = { version = "0.29", features = ["extension-module"] }
